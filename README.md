@@ -29,8 +29,8 @@ None.
         dns_cidr: 192.168.1.0/24
         dns_records:
           - name: control-plane
-            ipaddress: "192.168.1.10"
+            ipaddress: 192.168.1.10
           - name: compute
-            ipaddress: "192.168.1.11"
+            ipaddress: 192.168.1.11
       roles:
         - { role: bind-dns }
