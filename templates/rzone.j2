@@ -1,0 +1,16 @@
+$TTL	86400
+@	IN	SOA {{ dns_domain_name }}.	root.{{ dns_domain_name }}. (
+		1997022700 ; serial
+		28800 ; refresh
+		14400 ; retry
+		3600000 ; expire
+		86400 ) ; minimum
+
+	IN NS	ns.{{ dns_domain_name }}.
+
+{% for record in dns_records %}
+{% if record.name.startswith("*.") %}
+{% else %}
+{{ record.ipaddress.split('.')[3]  }} IN PTR {{ record.name }}.{{ dns_domain_name }}.
+{% endif %}
+{% endfor %}

@@ -1,0 +1,54 @@
+---
+- name: Validate input
+  assert:
+    that:
+      - dns_domain_name | length > 0
+      - dns_cidr | length > 0
+      - dns_records | length > 0
+    quiet: true
+
+- name: Ensure packages are installed and up to date
+  dnf:
+    name: bind
+    state: latest
+
+- name: Create zones file
+  template:
+    src: named.zones.j2
+    dest: /etc/named.zones
+    owner: root
+    group: named
+    mode: '0640'
+
+- name: Create file named.conf
+  template:
+    src: named.conf.j2
+    dest: /etc/named.conf
+    owner: root
+    group: named
+    mode: '0640'
+    validate: /usr/sbin/named-checkconf %s
+
+- name: Create zone file
+  template:
+    src: zone.j2
+    dest: /var/named/{{ dns_domain_name }}.zone
+    owner: root
+    group: named
+    mode: '0640'
+    validate: /usr/sbin/named-checkzone {{ dns_domain_name }} %s
+
+- name: Create reverse zone file
+  template:
+    src: rzone.j2
+    dest: /var/named/{{ dns_domain_name }}.rzone
+    owner: root
+    group: named
+    mode: '0640'
+    validate: /usr/sbin/named-checkzone {{ dns_cidr.split('.')[2] }}.{{ dns_cidr.split('.')[1] }}.{{ dns_cidr.split('.')[0] }}.in-addr.arpa %s
+
+- name: Enable and start named service
+  service:
+    name: named
+    state: started
+    enabled: true

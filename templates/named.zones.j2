@@ -1,0 +1,9 @@
+zone "{{ dns_domain_name }}" IN {
+	type master;
+	file "{{ dns_domain_name }}.zone";
+};
+
+zone "{{ dns_cidr.split('.')[2] }}.{{ dns_cidr.split('.')[1] }}.{{ dns_cidr.split('.')[0] }}.in-addr.arpa" IN {
+	type master;
+	file "{{ dns_domain_name }}.rzone";
+};
