@@ -1,4 +1,4 @@
-# Ansile Role: BIND DNS
+# Ansible Role: BIND DNS
 
 Installs and configures BIND DNS on RedHat Linux servers.
 
