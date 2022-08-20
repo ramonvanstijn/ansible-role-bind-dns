@@ -8,7 +8,7 @@ dns_cidr: ""
 
 # List of DNS records
 dns_records: []
-#- name: "control-plane"
-#  ipaddress: "192.168.1.10"
-#- name: "compute"
-#  ipaddress: "192.168.1.11"
+#- name: control-plane
+#  ipaddress: 192.168.1.10
+#- name: compute
+#  ipaddress: 192.168.1.11
