@@ -1,0 +1,10 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: bind-dns
+  author: raimondvanstijn
+  description: Installs and configures BIND DNS
+  galaxy_tags:
+    - dns
+    - bind
