@@ -1,6 +1,6 @@
 # Ansible Role: BIND DNS
 
-Installs and configures BIND DNS on RedHat Linux servers.
+Installs and configures BIND DNS on Red Hat Linux servers.
 
 ## Requirements
 
